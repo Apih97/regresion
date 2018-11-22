@@ -44,7 +44,7 @@ function regresion(data) {
     St += Math.pow(Y[i] - yAvg, 2);
   }
   
-  return [coefs, Math.sqrt(Se/(n-order-1)), 1-Se/St];
+  return [coefs, Math.sqrt(Se/(n-order-1)), 1-Se/St]; //coeficientes, error estandar, R cuadrado
 }
 
 function point(X,pos) {
