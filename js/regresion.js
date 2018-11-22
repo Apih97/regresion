@@ -1,24 +1,24 @@
 function regresion(data) {
-  var coefs;
-  var Se = 0, St = 0, yAvg = 0;
+  var coefs;        //Atrreglo que contiene coeficientes del modelo a0, a1, a2....
+  var Se = 0, St = 0, yAvg = 0; //
   var errorStd, Rcuad;
-  
-  var order = data.length - 1;
-  var n = data[0].length;
-  
-  var A = [];
+                                 //combinancion de las x y las y
+  var order = data.length - 1;  //numero de variable independientes, cuantas x hay
+  var n = data[0].length;       //numero de ecuaciones
+                                // numero de observaiones
+  var A = [];                   //se deja en blanco para luego ingresarse n datos
   for (var i=0; i<=order; i++) {
     A.push([]);
     for (var j=0; j<=order+1; j++)
       A[i].push(0);
-  }
+  }//inicia A vacio y luego lo llena con ceros
        
   var ones = [];
-  for (var i=0; i<n; i++) ones.push(1);
+  for (var i=0; i<n; i++) ones.push(1); //inicia A y lo llena con uno, parte de logaritno
   
-  var X = Array.from(data);
-  var Y = X.pop();
-  X.unshift(ones);
+  var X = Array.from(data); //datos de data los guarda en X
+  var Y = X.pop();          //remover ultimo elemento del 
+  X.unshift(ones);          //tomar valores de ones y agregarlos primero que los que están en X
   
   for (var i=0; i<= order; i++) {
     for (var j=0; j<=i; j++) {
@@ -35,11 +35,12 @@ function regresion(data) {
       sum += Y[l]*X[i][l];
     A[i][order+1] = sum;
   }
+  //23-37 fig 17.15 en libro
   
-  coefs = gauss(A);
+  coefs = gauss(A); 
   
   for (var i=0; i<n; i++) {
-    Se += Math.pow(Y[i]-sumprod(point(X,i),coefs),2);
+    Se += Math.pow(Y[i]-sumprod(point(X,i),coefs),2);   //point parecida a gotoxy en c++
     St += Math.pow(Y[i] - yAvg, 2);
   }
   
