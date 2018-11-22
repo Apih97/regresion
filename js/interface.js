@@ -1,6 +1,6 @@
 var order=2, n=9;
 
-loadSample([[0,0,1,2,0,1,2,2,1],[0,2,2,4,4,6,6,2,1],[14,21,11,12,23,23,14,6,11]]);
+loadSample([[0,0,1,2,0,1,2,2,1],[0,2,2,4,4,6,6,2,1],[14,21,11,12,23,23,14,6,11]]); //carga valores de ejemplo en la matriz
 
 function crearTabla(rows, cols) {
   var esp = document.querySelector(".datainput");
@@ -26,12 +26,12 @@ function crearTabla(rows, cols) {
   esp.append(tabla);
 }
 
-document.querySelector("#order").addEventListener("input", function(e) {
+document.querySelector("#order").addEventListener("input", function(e) { //agrega manejador de evento cuando cambia el numero en recuadro
   order = +e.target.value;
   crearTabla(n,order+1);
 });
 
-document.querySelector("#n").addEventListener("input", function(e) {
+document.querySelector("#n").addEventListener("input", function(e) {  //agrega manejador de evento cuando cambia el numero en recuadro
   n = +e.target.value;
   crearTabla(n,order+1);
 });
@@ -54,11 +54,11 @@ document.querySelector("button").addEventListener("click", function() {
   
   var elementos = document.querySelectorAll("table input");
 
-  for (var i = 0; i < elementos.length; i++) {
+  for (var i = 0; i < elementos.length; i++) { //leer valores input y los inserta en data ordenadamente
     var v = +elementos[i].value;
     if (i <= order) {
-      data.push([]);
-      data[i].push(v);
+      data.push([]);  //ingresar en una dimension                            
+      data[i].push(v);  //ingresar en otra dimension
     }
     else
       data[i%(order+1)].push(v);
@@ -68,7 +68,7 @@ document.querySelector("button").addEventListener("click", function() {
   
   var results = document.querySelector("#results");
   var txt = "<h1>Resultados</h1>Ecuación: " + equation(reg[0]) + "<br>";
-  txt += "Error estándar: " + reg[1].toFixed(3) + "<br>";
+  txt += "Error estándar: " + reg[1].toFixed(3) + "<br>";   //tofixed deja (n) decimales en este caso 3
   txt += "R cuadrado: " + reg[2].toFixed(3);
   results.innerHTML = txt;
 });
